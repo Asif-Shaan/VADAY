@@ -58,13 +58,6 @@
             border: 4px solid #F8BBD0;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem 1rem;
-                margin: 10px;
-            }
-        }
-
         .date-tag {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
@@ -89,6 +82,17 @@
             font-size: 5rem;
             margin: 1.5rem 0;
             animation: heartbeat 1.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            user-select: none;
+        }
+
+        .emoji:hover {
+            transform: scale(1.15);
+        }
+
+        .emoji:active {
+            transform: scale(0.95);
         }
 
         @keyframes heartbeat {
@@ -163,16 +167,130 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
+
+        /* GIF Overlay */
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .gif-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gif-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gif-overlay.active .gif-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gif-overlay.closing .gif-container {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Click hint */
+        .click-hint {
+            font-size: 0.9rem;
+            color: #D32F2F;
+            margin-top: 0.5rem;
+            font-style: italic;
+            opacity: 0.7;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive padding */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+                margin: 15px;
+            }
+            .message {
+                padding: 1.5rem;
+                font-size: 1.2rem;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            .gif-container img {
+                border-radius: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+            .message {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .emoji {
+                font-size: 4rem;
+            }
+            .gif-container img {
+                border-radius: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="envelopes"></div>
     <div class="love-ring"></div>
     
+    <!-- GIF Overlay -->
+    <div class="gif-overlay" id="gifOverlay">
+        <div class="gif-container">
+            <img src="https://media.tenor.com/N7GiO8UsfooAAAAj/bubu-dudu-heart.gif" alt="Love Proposal">
+        </div>
+    </div>
+    
     <div class="container">
         <div class="date-tag">February 8, 2026</div>
         <h1>Propose Day</h1>
-        <div class="emoji">💌</div>
+        <div class="emoji" id="proposeEmoji">💌</div>
+        <div class="click-hint">✨ Click for my heart! ✨</div>
         
         <div class="message">
             From the moment I met you, I knew my life would never be the same. You are my <span class="highlight">dream come true</span>, my reason to smile every day, and my forever person. Soha, will you continue to walk this beautiful journey of life with me? Will you be mine, today and always?
@@ -207,6 +325,42 @@
         }
 
         createEnvelopes();
+
+        // Interactive GIF Animation
+        const proposeEmoji = document.getElementById('proposeEmoji');
+        const gifOverlay = document.getElementById('gifOverlay');
+        let isAnimating = false;
+
+        proposeEmoji.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Show the overlay with smooth fade-in
+            gifOverlay.classList.add('active');
+            gifOverlay.classList.remove('closing');
+
+            // Auto-hide after 5 seconds with smooth fade-out
+            setTimeout(() => {
+                gifOverlay.classList.add('closing');
+                
+                // Remove active class after transition
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }, 5000);
+        });
+
+        // Click overlay to close early
+        gifOverlay.addEventListener('click', (e) => {
+            if (e.target === gifOverlay) {
+                gifOverlay.classList.add('closing');
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
