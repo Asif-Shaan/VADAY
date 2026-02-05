@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propose Day - February 8 💌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #D32F2F 0%, #F8BBD0 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .envelope-float {
+            position: fixed;
+            font-size: 2.5rem;
+            pointer-events: none;
+            animation: float-diagonal 10s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes float-diagonal {
+            0% {
+                transform: translate(-100px, 100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translate(100vw, -100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(211, 47, 47, 0.5);
+            text-align: center;
+            max-width: 750px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            border: 4px solid #F8BBD0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+        }
+
+        .date-tag {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #D32F2F;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: #D32F2F;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(211, 47, 47, 0.1);
+        }
+
+        .emoji {
+            font-size: 5rem;
+            margin: 1.5rem 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 2.2;
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(248, 187, 208, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border-radius: 20px;
+            border-left: 5px solid #D32F2F;
+        }
+
+        .highlight {
+            color: #D32F2F;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .signature {
+            font-size: 1.3rem;
+            color: #D32F2F;
+            margin-top: 2rem;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #D32F2F 0%, #F8BBD0 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(211, 47, 47, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(211, 47, 47, 0.5);
+        }
+
+        .love-ring {
+            width: 200px;
+            height: 200px;
+            border: 3px dashed #F8BBD0;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate-ring 20s linear infinite;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes rotate-ring {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="envelopes"></div>
+    <div class="love-ring"></div>
+    
+    <div class="container">
+        <div class="date-tag">February 8, 2026</div>
+        <h1>Propose Day</h1>
+        <div class="emoji">💌</div>
+        
+        <div class="message">
+            From the moment I met you, I knew my life would never be the same. You are my <span class="highlight">dream come true</span>, my reason to smile every day, and my forever person. Soha, will you continue to walk this beautiful journey of life with me? Will you be mine, today and always?
+        </div>
+
+        <div class="signature">With all my heart, yours forever 💕</div>
+
+        <div style="margin-top: 2.5rem;">
+            <a href="rose-day.html" class="nav-btn">← Previous Day</a>
+            <a href="index.html" class="nav-btn">Week View</a>
+            <a href="chocolate-day.html" class="nav-btn">Next Day →</a>
+        </div>
+    </div>
+
+    <script>
+        // Create floating envelopes
+        function createEnvelopes() {
+            const container = document.getElementById('envelopes');
+            const emojis = ['💌', '💖', '💝', '💗'];
+            
+            setInterval(() => {
+                const envelope = document.createElement('div');
+                envelope.className = 'envelope-float';
+                envelope.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                envelope.style.left = Math.random() * -100 + 'px';
+                envelope.style.top = Math.random() * 100 + 'vh';
+                envelope.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                container.appendChild(envelope);
+                
+                setTimeout(() => envelope.remove(), 12000);
+            }, 2000);
+        }
+
+        createEnvelopes();
+    </script>
+</body>
+</html>

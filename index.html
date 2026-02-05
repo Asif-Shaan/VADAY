@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Week 2026 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .week-info {
+                font-size: 1.1rem;
+            }
+            
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .day-card {
+                padding: 1rem;
+            }
+            
+            .day-number {
+                font-size: 1.5rem;
+            }
+            
+            .day-name {
+                font-size: 0.9rem;
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #C8102E;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .week-info {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .day-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-card.current {
+            background: linear-gradient(135deg, #C8102E 0%, #E91E63 100%);
+            box-shadow: 0 15px 40px rgba(200, 16, 46, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .day-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .current-day-banner {
+            background: linear-gradient(135deg, #C8102E 0%, #E91E63 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 2rem;
+            line-height: 1.8;
+        }
+
+        .heart-float {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: float-up 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>💝 Valentine's Week 2026 💝</h1>
+        <p class="week-info">A week of love for Soha</p>
+        
+        <div id="currentDayBanner" class="current-day-banner" style="display: none;">
+            Today is <span id="todayName"></span>! 💕
+        </div>
+
+        <div class="days-grid">
+            <a href="rose-day.html" class="day-card" id="day7">
+                <div class="day-number">7</div>
+                <div class="day-name">🌹 Rose Day</div>
+            </a>
+            <a href="propose-day.html" class="day-card" id="day8">
+                <div class="day-number">8</div>
+                <div class="day-name">💌 Propose Day</div>
+            </a>
+            <a href="chocolate-day.html" class="day-card" id="day9">
+                <div class="day-number">9</div>
+                <div class="day-name">🍫 Chocolate Day</div>
+            </a>
+            <a href="teddy-day.html" class="day-card" id="day10">
+                <div class="day-number">10</div>
+                <div class="day-name">🧸 Teddy Day</div>
+            </a>
+            <a href="promise-day.html" class="day-card" id="day11">
+                <div class="day-number">11</div>
+                <div class="day-name">🤝 Promise Day</div>
+            </a>
+            <a href="hug-day.html" class="day-card" id="day12">
+                <div class="day-number">12</div>
+                <div class="day-name">🤗 Hug Day</div>
+            </a>
+            <a href="kiss-day.html" class="day-card" id="day13">
+                <div class="day-number">13</div>
+                <div class="day-name">💋 Kiss Day</div>
+            </a>
+            <a href="valentine-day.html" class="day-card" id="day14">
+                <div class="day-number">14</div>
+                <div class="day-name">❤️ Valentine's Day</div>
+            </a>
+        </div>
+
+        <p class="message" id="mainMessage">
+            Click on any day to see your special message! 💕
+        </p>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const hearts = ['❤️', '💕', '💖', '💗', '💝'];
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 1000);
+        }
+
+        // Check current date and highlight current day
+        function highlightCurrentDay() {
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1; // JavaScript months are 0-indexed
+            
+            // Check if it's February 2026
+            if (month === 2) {
+                const dayNames = {
+                    7: '🌹 Rose Day',
+                    8: '💌 Propose Day',
+                    9: '🍫 Chocolate Day',
+                    10: '🧸 Teddy Day',
+                    11: '🤝 Promise Day',
+                    12: '🤗 Hug Day',
+                    13: '💋 Kiss Day',
+                    14: '❤️ Valentine\'s Day'
+                };
+
+                if (day >= 7 && day <= 14) {
+                    const currentCard = document.getElementById('day' + day);
+                    if (currentCard) {
+                        currentCard.classList.add('current');
+                        document.getElementById('currentDayBanner').style.display = 'block';
+                        document.getElementById('todayName').textContent = dayNames[day];
+                        document.getElementById('mainMessage').textContent = 'Today is your special day! Click to see your message 💕';
+                    }
+                }
+            }
+        }
+
+        // Initialize
+        createStars();
+        createFloatingHearts();
+        highlightCurrentDay();
+    </script>
+</body>
+</html>

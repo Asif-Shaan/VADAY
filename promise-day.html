@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Day - February 11 🤝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #64B5F6 0%, #FFFFFF 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .promise-rings {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgba(100, 181, 246, 0.3);
+            border-radius: 50%;
+            animation: ring-expand 4s ease-out infinite;
+        }
+
+        @keyframes ring-expand {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(100, 181, 246, 0.4);
+            text-align: center;
+            max-width: 800px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            border: 4px solid #64B5F6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+        }
+
+        .date-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #64B5F6;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
+            color: #64B5F6;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .emoji {
+            font-size: 5rem;
+            margin: 1.5rem 0;
+            animation: promise-seal 3s ease-in-out infinite;
+        }
+
+        @keyframes promise-seal {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+            }
+            50% {
+                transform: scale(1.1) translateY(-10px);
+            }
+        }
+
+        .promises-list {
+            text-align: left;
+            font-size: 1.3rem;
+            color: #333;
+            line-height: 2.5;
+            margin: 2.5rem auto;
+            max-width: 600px;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border-radius: 20px;
+            border-left: 5px solid #64B5F6;
+        }
+
+        .promises-list li {
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            list-style: none;
+            position: relative;
+        }
+
+        .promises-list li::before {
+            content: '💙';
+            position: absolute;
+            left: -2rem;
+        }
+
+        .promise-word {
+            color: #64B5F6;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .signature {
+            font-size: 1.4rem;
+            color: #64B5F6;
+            margin-top: 2.5rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #64B5F6 0%, #2196F3 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(100, 181, 246, 0.4);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(100, 181, 246, 0.6);
+        }
+
+        .trust-badge {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            animation: float-badge 5s ease-in-out infinite;
+        }
+
+        @keyframes float-badge {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="promise-rings" id="rings"></div>
+    
+    <div class="container">
+        <div class="trust-badge" style="top: 5%; left: 5%;">🤝</div>
+        <div class="trust-badge" style="top: 10%; right: 5%; animation-delay: 1s;">💍</div>
+        <div class="trust-badge" style="bottom: 5%; left: 8%; animation-delay: 2s;">🤝</div>
+        <div class="trust-badge" style="bottom: 10%; right: 8%; animation-delay: 1.5s;">💍</div>
+
+        <div class="date-tag">February 11, 2026</div>
+        <h1>Promise Day</h1>
+        <div class="emoji">🤝</div>
+        
+        <div class="promises-list">
+            <ul>
+                <li>I promise to <span class="promise-word">love you unconditionally</span>, through every sunrise and every storm</li>
+                <li>I promise to <span class="promise-word">be your best friend</span>, your confidant, and your biggest supporter</li>
+                <li>I promise to <span class="promise-word">cherish every moment</span> we share, from the extraordinary to the everyday</li>
+                <li>I promise to <span class="promise-word">stand by your side</span>, in laughter and in tears, in triumph and in challenge</li>
+                <li>I promise to make you <span class="promise-word">smile every single day</span>, Soha, for as long as I live</li>
+            </ul>
+        </div>
+
+        <div class="signature">These promises are eternal 💙</div>
+
+        <div style="margin-top: 2.5rem;">
+            <a href="teddy-day.html" class="nav-btn">← Previous Day</a>
+            <a href="index.html" class="nav-btn">Week View</a>
+            <a href="hug-day.html" class="nav-btn">Next Day →</a>
+        </div>
+    </div>
+
+    <script>
+        // Create expanding rings
+        function createRings() {
+            const container = document.getElementById('rings');
+            
+            setInterval(() => {
+                const ring = document.createElement('div');
+                ring.className = 'ring';
+                ring.style.left = Math.random() * 100 + '%';
+                ring.style.top = Math.random() * 100 + '%';
+                ring.style.animationDelay = '0s';
+                container.appendChild(ring);
+                
+                setTimeout(() => ring.remove(), 4000);
+            }, 2000);
+        }
+
+        createRings();
+    </script>
+</body>
+</html>

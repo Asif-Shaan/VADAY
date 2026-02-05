@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day - February 7 🌹</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #C8102E 0%, #E91E63 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .rose-petals {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50% 50% 0 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 700px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            border: 3px solid rgba(200, 16, 46, 0.3);
+        }
+
+        .date-tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #C8102E;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: #C8102E;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .emoji {
+            font-size: 5rem;
+            margin: 1rem 0;
+            animation: rotate 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(-10deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #333;
+            line-height: 2;
+            margin: 2rem 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .message::before,
+        .message::after {
+            content: '"';
+            font-size: 3rem;
+            color: #E91E63;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .message::before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .message::after {
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .signature {
+            font-size: 1.2rem;
+            color: #C8102E;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #C8102E 0%, #E91E63 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(200, 16, 46, 0.4);
+        }
+
+        .rose-border {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .rose-border:nth-child(1) { top: 10px; left: 10px; }
+        .rose-border:nth-child(2) { top: 10px; right: 10px; }
+        .rose-border:nth-child(3) { bottom: 10px; left: 10px; }
+        .rose-border:nth-child(4) { bottom: 10px; right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="rose-petals" id="petals"></div>
+    
+    <div class="container">
+        <div class="rose-border">🌹</div>
+        <div class="rose-border">🌹</div>
+        <div class="rose-border">🌹</div>
+        <div class="rose-border">🌹</div>
+
+        <div class="date-tag">FEBRUARY 7, 2026</div>
+        <h1>Rose Day</h1>
+        <div class="emoji">🌹</div>
+        
+        <div class="message">
+            Like a rose that blooms with grace and beauty, you've brought color and fragrance to my life. Each petal represents a reason I adore you, and like the eternal rose, my love for you will never wither. You are my most precious bloom, Soha.
+        </div>
+
+        <div class="signature">Forever yours 💕</div>
+
+        <div style="margin-top: 2rem;">
+            <a href="index.html" class="nav-btn">← Back to Week</a>
+            <a href="propose-day.html" class="nav-btn">Next Day →</a>
+        </div>
+    </div>
+
+    <script>
+        // Create falling rose petals
+        function createPetals() {
+            const petalsContainer = document.getElementById('petals');
+            for (let i = 0; i < 30; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.opacity = Math.random() * 0.5 + 0.3;
+                petalsContainer.appendChild(petal);
+            }
+        }
+
+        createPetals();
+    </script>
+</body>
+</html>

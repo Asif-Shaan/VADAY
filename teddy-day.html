@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teddy Day - February 10 🧸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #D7CCC8 0%, #FADADD 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .teddy-float {
+            position: fixed;
+            font-size: 3rem;
+            pointer-events: none;
+            animation: bounce-float 4s ease-in-out infinite;
+        }
+
+        @keyframes bounce-float {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3.5rem;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(161, 136, 127, 0.4);
+            text-align: center;
+            max-width: 750px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            border: 5px solid #FADADD;
+        }
+
+        .date-tag {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            color: #A1887F;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 4.5rem;
+            color: #A1887F;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .emoji {
+            font-size: 6rem;
+            margin: 1.5rem 0;
+            animation: cuddle 2s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(161, 136, 127, 0.3));
+        }
+
+        @keyframes cuddle {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.05) rotate(-5deg);
+            }
+            75% {
+                transform: scale(1.05) rotate(5deg);
+            }
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #555;
+            line-height: 2.1;
+            margin: 2.5rem 0;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(250, 218, 221, 0.3) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border-radius: 30px;
+            border: 3px solid #FADADD;
+        }
+
+        .cozy {
+            color: #A1887F;
+            font-weight: 700;
+        }
+
+        .signature {
+            font-size: 1.3rem;
+            color: #A1887F;
+            margin-top: 2rem;
+            font-weight: 700;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #A1887F 0%, #FADADD 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(161, 136, 127, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(250, 218, 221, 0.6);
+        }
+
+        .heart-paw {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: paw-print 3s ease-in-out infinite;
+        }
+
+        @keyframes paw-print {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="teddies"></div>
+    
+    <div class="container">
+        <div class="heart-paw" style="top: 10%; left: 5%;">🐾</div>
+        <div class="heart-paw" style="top: 15%; right: 8%; animation-delay: 1s;">❤️</div>
+        <div class="heart-paw" style="bottom: 10%; left: 10%; animation-delay: 2s;">🐾</div>
+        <div class="heart-paw" style="bottom: 15%; right: 5%; animation-delay: 1.5s;">❤️</div>
+
+        <div class="date-tag">February 10, 2026</div>
+        <h1>Teddy Day</h1>
+        <div class="emoji">🧸</div>
+        
+        <div class="message">
+            Just like a teddy bear brings comfort and warmth, you are my safe haven, my source of endless joy and <span class="cozy">coziest cuddles</span>. You're soft when I need gentleness, strong when I need support, and always there when I need a hug. You're my favorite cuddle buddy, Soha, today and always. 🫂
+        </div>
+
+        <div class="signature">Hugging you forever 🧸💕</div>
+
+        <div style="margin-top: 2.5rem;">
+            <a href="chocolate-day.html" class="nav-btn">← Previous Day</a>
+            <a href="index.html" class="nav-btn">Week View</a>
+            <a href="promise-day.html" class="nav-btn">Next Day →</a>
+        </div>
+    </div>
+
+    <script>
+        // Create floating teddies
+        function createTeddies() {
+            const teddies = ['🧸', '🐻', '💝', '🎀'];
+            
+            for (let i = 0; i < 8; i++) {
+                const teddy = document.createElement('div');
+                teddy.className = 'teddy-float';
+                teddy.textContent = teddies[Math.floor(Math.random() * teddies.length)];
+                teddy.style.left = (Math.random() * 90 + 5) + '%';
+                teddy.style.top = (Math.random() * 90 + 5) + '%';
+                teddy.style.animationDelay = Math.random() * 2 + 's';
+                teddy.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                teddy.style.opacity = Math.random() * 0.4 + 0.2;
+                document.body.appendChild(teddy);
+            }
+        }
+
+        createTeddies();
+    </script>
+</body>
+</html>

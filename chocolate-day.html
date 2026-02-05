@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Day - February 9 🍫</title>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .chocolate-rain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .chocolate {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall-chocolate linear infinite;
+        }
+
+        @keyframes fall-chocolate {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: linear-gradient(135deg, rgba(248, 244, 230, 0.98) 0%, rgba(255, 250, 240, 0.98) 100%);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 750px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            border: 5px solid #D4AF37;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+        }
+
+        .date-tag {
+            font-family: 'Italiana', serif;
+            font-size: 1.3rem;
+            color: #5D4037;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Italiana', serif;
+            font-size: 4.5rem;
+            color: #3E2723;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            line-height: 1.2;
+            text-shadow: 2px 2px 0 #D4AF37;
+        }
+
+        .emoji {
+            font-size: 5.5rem;
+            margin: 1.5rem 0;
+            animation: melt 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(93, 64, 55, 0.3));
+        }
+
+        @keyframes melt {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.95) translateY(5px); }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            color: #3E2723;
+            line-height: 2.2;
+            margin: 2.5rem 0;
+            padding: 2.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            border: 2px dashed #D4AF37;
+            position: relative;
+        }
+
+        .message::before {
+            content: '🍫';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: linear-gradient(135deg, rgba(248, 244, 230, 1) 0%, rgba(255, 250, 240, 1) 100%);
+            padding: 0 20px;
+        }
+
+        .sweet {
+            color: #D4AF37;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .signature {
+            font-size: 1.3rem;
+            color: #5D4037;
+            margin-top: 2rem;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #5D4037 0%, #D4AF37 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Italiana', serif;
+            font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(93, 64, 55, 0.4);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        .gold-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #D4AF37;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chocolate-rain" id="chocolates"></div>
+    
+    <div class="container">
+        <div class="gold-sparkle" style="top: 20px; left: 30px; animation-delay: 0s;"></div>
+        <div class="gold-sparkle" style="top: 40px; right: 50px; animation-delay: 0.5s;"></div>
+        <div class="gold-sparkle" style="bottom: 60px; left: 60px; animation-delay: 1s;"></div>
+        <div class="gold-sparkle" style="bottom: 30px; right: 40px; animation-delay: 1.5s;"></div>
+
+        <div class="date-tag">February 9, 2026</div>
+        <h1>Chocolate Day</h1>
+        <div class="emoji">🍫</div>
+        
+        <div class="message">
+            You are sweeter than the finest chocolate, richer than the most luxurious truffle, and more precious than gold. Every moment with you is like savoring the most <span class="sweet">delicious treat</span> - absolutely irresistible and always leaving me wanting more. You make life deliciously sweet, Soha.
+        </div>
+
+        <div class="signature">Sweetly yours 🍫✨</div>
+
+        <div style="margin-top: 2.5rem;">
+            <a href="propose-day.html" class="nav-btn">← Previous Day</a>
+            <a href="index.html" class="nav-btn">Week View</a>
+            <a href="teddy-day.html" class="nav-btn">Next Day →</a>
+        </div>
+    </div>
+
+    <script>
+        // Create falling chocolates
+        function createChocolates() {
+            const container = document.getElementById('chocolates');
+            const chocolateEmojis = ['🍫', '🍬', '🍭', '🧁'];
+            
+            for (let i = 0; i < 20; i++) {
+                const chocolate = document.createElement('div');
+                chocolate.className = 'chocolate';
+                chocolate.textContent = chocolateEmojis[Math.floor(Math.random() * chocolateEmojis.length)];
+                chocolate.style.left = Math.random() * 100 + '%';
+                chocolate.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                chocolate.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(chocolate);
+            }
+        }
+
+        createChocolates();
+    </script>
+</body>
+</html>
