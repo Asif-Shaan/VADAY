@@ -44,6 +44,57 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
+        /* Music Controls - Top Right */
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #C8102E;
+            border: 2px solid #C8102E;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-btn:hover {
+            background: #C8102E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(200, 16, 46, 0.4);
+        }
+
+        .music-btn.playing {
+            background: #C8102E;
+            color: white;
+            animation: pulse-music 2s infinite;
+        }
+
+        @keyframes pulse-music {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            .music-controls {
+                top: 10px;
+                right: 10px;
+            }
+
+            .music-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 3rem;
@@ -197,6 +248,15 @@
 <body>
     <div class="stars" id="stars"></div>
     
+    <!-- Music Player -->
+    <div id="musicControls" class="music-controls">
+        <button id="musicToggle" class="music-btn">🎵 Play Music</button>
+        <audio id="bgMusic" loop>
+            <source src="https://res.cloudinary.com/dr2otrvrz/video/upload/v1770322598/ishq-wala-love-soty-mr-jatin_TpwX5MhE_darj6n.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
     <div class="container">
         <h1>💝 Valentine's Week 2026 💝</h1>
         <p class="week-info">A week of love for Soha</p>
@@ -246,6 +306,25 @@
     </div>
 
     <script>
+        // Music Player Functionality
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = '🎵 Play Music';
+                musicToggle.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicToggle.textContent = '⏸️ Pause Music';
+                musicToggle.classList.add('playing');
+                isPlaying = true;
+            }
+        });
+
         // Create stars
         function createStars() {
             const starsContainer = document.getElementById('stars');
