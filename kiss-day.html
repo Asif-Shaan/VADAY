@@ -95,6 +95,17 @@
             margin: 2rem 0;
             animation: kiss-blow 3s ease-in-out infinite;
             filter: drop-shadow(0 10px 30px rgba(183, 28, 28, 0.5));
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            user-select: none;
+        }
+
+        .emoji:hover {
+            transform: scale(1.1);
+        }
+
+        .emoji:active {
+            transform: scale(0.95);
         }
 
         @keyframes kiss-blow {
@@ -197,11 +208,150 @@
                 transform: scale(1);
             }
         }
+
+        /* GIF Overlay with 2x2 Grid */
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+        }
+
+        .gif-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gif-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 90vw;
+            max-height: 90vh;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gif-overlay.active .gif-grid {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gif-overlay.closing .gif-grid {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gif-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: #fff;
+        }
+
+        .gif-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Click hint */
+        .click-hint {
+            font-size: 0.9rem;
+            color: #800020;
+            margin-top: 0.5rem;
+            font-style: italic;
+            opacity: 0.7;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            .emoji {
+                font-size: 5rem;
+            }
+            .message {
+                font-size: 1.3rem;
+                padding: 2rem;
+            }
+            .gif-grid {
+                gap: 15px;
+                max-width: 95vw;
+            }
+            .gif-item {
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .emoji {
+                font-size: 4rem;
+            }
+            .message {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+                line-height: 2;
+            }
+            .gif-grid {
+                gap: 10px;
+                padding: 10px;
+            }
+            .gif-item {
+                border-radius: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="kiss-marks" id="kissMarks"></div>
     <div id="sparkles"></div>
+    
+    <!-- GIF Overlay with 2x2 Grid -->
+    <div class="gif-overlay" id="gifOverlay">
+        <div class="gif-grid">
+            <div class="gif-item">
+                <img src="https://media1.tenor.com/m/PXKZhCEfEfsAAAAC/bubu-bubu-dudu.gif" alt="Bubu Dudu Kiss 1">
+            </div>
+            <div class="gif-item">
+                <img src="https://media1.tenor.com/m/gUiu1zyxfzYAAAAC/bear-kiss-bear-kisses.gif" alt="Bear Kiss">
+            </div>
+            <div class="gif-item">
+                <img src="https://media1.tenor.com/m/aMOxt0o16TQAAAAC/bubu-bubu-dudu.gif" alt="Bubu Dudu Kiss 2">
+            </div>
+            <div class="gif-item">
+                <img src="https://media1.tenor.com/m/mKr-KcMW9RcAAAAC/cute-bears.gif" alt="Cute Bears Kiss">
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="lipstick-heart" style="top: 5%; left: 5%;">💋</div>
@@ -211,7 +361,8 @@
 
         <div class="date-tag">February 13, 2026</div>
         <h1>Kiss Day</h1>
-        <div class="emoji">💋</div>
+        <div class="emoji" id="kissEmoji">💋</div>
+        <div class="click-hint">✨ Click for sweet kisses! ✨</div>
         
         <div class="message">
             Every kiss from you sets my soul on fire. Your lips are pure <span class="passion">magic</span>, turning ordinary moments into extraordinary memories. In your kiss, I find passion, love, and a promise of forever. You're the sweetest addiction, Soha, and I never want to break free. 💋✨
@@ -260,6 +411,42 @@
 
         createKissMarks();
         createSparkles();
+
+        // Interactive GIF Grid Animation
+        const kissEmoji = document.getElementById('kissEmoji');
+        const gifOverlay = document.getElementById('gifOverlay');
+        let isAnimating = false;
+
+        kissEmoji.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Show the overlay with smooth fade-in
+            gifOverlay.classList.add('active');
+            gifOverlay.classList.remove('closing');
+
+            // Auto-hide after 6 seconds with smooth fade-out
+            setTimeout(() => {
+                gifOverlay.classList.add('closing');
+                
+                // Remove active class after transition
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }, 6000);
+        });
+
+        // Click overlay to close early
+        gifOverlay.addEventListener('click', (e) => {
+            if (e.target === gifOverlay) {
+                gifOverlay.classList.add('closing');
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
