@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CUSTOMIZE: Browser tab title -->
     <title>Valentine's Day 2026 💝</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     <style>
         .back-nav {
@@ -32,6 +29,242 @@
             background: var(--button-hover);
             box-shadow: 0 10px 25px rgba(255, 23, 68, 0.4);
         }
+
+        /* Gift Gallery Styles */
+        .gift-section {
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .gift-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gift-trigger {
+            font-size: 1.2rem;
+            color: #FF1744;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 23, 68, 0.1) 0%, rgba(255, 105, 135, 0.1) 100%);
+            border-radius: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px dashed #FF1744;
+            animation: pulse-gift 2s ease-in-out infinite;
+            user-select: none;
+        }
+
+        .gift-trigger:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 23, 68, 0.2) 0%, rgba(255, 105, 135, 0.2) 100%);
+            box-shadow: 0 10px 30px rgba(255, 23, 68, 0.3);
+        }
+
+        @keyframes pulse-gift {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Photo Gallery Overlay */
+        .gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gallery-overlay.active .gallery-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gallery-overlay.closing .gallery-container {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .photo-display {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-display img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(255, 23, 68, 0.5);
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 23, 68, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 23, 68, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .nav-arrow.prev {
+            left: 20px;
+        }
+
+        .nav-arrow.next {
+            right: 20px;
+        }
+
+        /* Photo Counter */
+        .photo-counter {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 23, 68, 0.9);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            z-index: 10001;
+        }
+
+        /* Close Button */
+        .close-gallery {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 23, 68, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-gallery:hover {
+            background: rgba(255, 23, 68, 1);
+            transform: rotate(90deg);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .nav-arrow.prev {
+                left: 10px;
+            }
+
+            .nav-arrow.next {
+                right: 10px;
+            }
+
+            .photo-counter {
+                font-size: 0.9rem;
+                padding: 0.4rem 1.2rem;
+            }
+
+            .close-gallery {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+                top: 15px;
+                right: 15px;
+            }
+
+            .photo-display img {
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gift-trigger {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .photo-display img {
+                border-radius: 10px;
+                max-height: 80vh;
+            }
+        }
     </style>
 </head>
 <body>
@@ -39,6 +272,7 @@
     <div class="floating-elements">
         <!-- Hearts and bears will be added here by JavaScript -->
     </div>
+    
     <!-- Main Content Container -->
     <div class="container">
         <div class="back-nav">
@@ -56,20 +290,20 @@
                 Your browser does not support the audio element.
             </audio>
         </div>
+        
         <!-- First Question -->
         <div class="question-section" id="question1">
             <h2 id="question1Text"></h2>
             <button class="cute-btn" onclick="moveButton(this)" id="yesBtn1"></button>
             <button class="cute-btn" onclick="moveButton(this)" id="noBtn1"></button>
-            <!-- CUSTOMIZE: Secret answer text -->
             <div class="secret-answer">
                 <button class="cute-btn special" onclick="showNextQuestion(2)" id="secretAnswerBtn"></button>
             </div>
         </div>
+        
         <!-- Second Question (Love Meter) -->
         <div class="question-section hidden" id="question2">
             <h2 id="question2Text"></h2>
-            <!-- Love meter settings: min="0" max="10000" -->
             <div class="love-meter">
                 <input type="range" min="0" max="10000" value="100" class="slider" id="loveMeter">
                 <p>
@@ -79,28 +313,189 @@
             </div>
             <button class="cute-btn" onclick="showNextQuestion(3)" id="nextBtn"></button>
         </div>
+        
         <!-- Third Question -->
         <div class="question-section hidden" id="question3">
             <h2 id="question3Text"></h2>
             <button class="cute-btn" onclick="showNextQuestion(4)" id="yesBtn3"></button>
             <button class="cute-btn" onclick="moveButton(this)" id="noBtn3"></button>
         </div>
-        <!-- Fourth Question (NEW!) -->
+        
+        <!-- Fourth Question -->
         <div class="question-section hidden" id="question4">
             <h2 id="question4Text"></h2>
             <button class="cute-btn final-yes" onclick="celebrate()" id="yesBtn4"></button>
             <button class="cute-btn" onclick="moveButton(this)" id="noBtn4"></button>
         </div>
-        <!-- CUSTOMIZE: Celebration message -->
+        
+        <!-- Celebration message -->
         <div class="celebration hidden" id="celebration">
             <h2 id="celebrationTitle"></h2>
             <p class="celebration-text" id="celebrationMessage"></p>
             <p class="celebration-text" id="celebrationEmojis"></p>
+            
+            <!-- Gift Section -->
+            <div class="gift-section" id="giftSection">
+                <div class="gift-trigger" id="giftTrigger">
+                    🎁 Click here for your gift! 🎁
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Photo Gallery Overlay -->
+    <div class="gallery-overlay" id="galleryOverlay">
+        <div class="gallery-container">
+            <div class="photo-counter" id="photoCounter">1 / 7</div>
+            <button class="close-gallery" id="closeGallery">×</button>
+            
+            <button class="nav-arrow prev" id="prevPhoto">‹</button>
+            <button class="nav-arrow next" id="nextPhoto">›</button>
+            
+            <div class="photo-display">
+                <img id="currentPhoto" src="" alt="Memory">
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="config.js"></script>
     <script src="theme.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Gallery Script -->
+    <script>
+        // Photos in order: bouquet first, then reverse order of the rest
+        const giftPhotos = [
+            'WhatsApp_Image_2026-02-06_at_1_06_20_AM.jpeg',      // Bouquet photo
+            'WhatsApp_Image_2026-02-06_at_1_06_20_AM__1_.jpeg',  // Glasses close-up
+            'WhatsApp_Image_2026-02-06_at_1_06_20_AM__2_.jpeg',  // Monument selfie
+            'WhatsApp_Image_2026-02-06_at_1_06_21_AM.jpeg',      // Yellow taxi selfie
+            'WhatsApp_Image_2026-02-06_at_1_06_21_AM__1_.jpeg',  // Outdoor portrait
+            'WhatsApp_Image_2026-02-06_at_1_06_21_AM__2_.jpeg',  // Black & white collage
+            'WhatsApp_Image_2026-02-06_at_1_12_27_AM.jpeg'       // Flowers selfie
+        ];
+
+        let currentPhotoIndex = 0;
+
+        // Get elements
+        const giftTrigger = document.getElementById('giftTrigger');
+        const galleryOverlay = document.getElementById('galleryOverlay');
+        const currentPhoto = document.getElementById('currentPhoto');
+        const photoCounter = document.getElementById('photoCounter');
+        const prevBtn = document.getElementById('prevPhoto');
+        const nextBtn = document.getElementById('nextPhoto');
+        const closeBtn = document.getElementById('closeGallery');
+        const giftSection = document.getElementById('giftSection');
+
+        // Show gift trigger with animation after celebration
+        // Add this to your existing celebrate() function or call it when celebration shows
+        window.addEventListener('load', function() {
+            // Check if celebration is visible and show gift section
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    const celebration = document.getElementById('celebration');
+                    if (celebration && !celebration.classList.contains('hidden')) {
+                        setTimeout(() => {
+                            giftSection.classList.add('show');
+                        }, 1500);
+                    }
+                });
+            });
+
+            const celebration = document.getElementById('celebration');
+            if (celebration) {
+                observer.observe(celebration, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+        });
+
+        // Open gallery
+        if (giftTrigger) {
+            giftTrigger.addEventListener('click', () => {
+                currentPhotoIndex = 0;
+                updatePhoto();
+                galleryOverlay.classList.add('active');
+                galleryOverlay.classList.remove('closing');
+            });
+        }
+
+        // Close gallery
+        function closeGallery() {
+            galleryOverlay.classList.add('closing');
+            setTimeout(() => {
+                galleryOverlay.classList.remove('active', 'closing');
+            }, 500);
+        }
+
+        closeBtn.addEventListener('click', closeGallery);
+
+        // Click overlay background to close
+        galleryOverlay.addEventListener('click', (e) => {
+            if (e.target === galleryOverlay) {
+                closeGallery();
+            }
+        });
+
+        // Previous photo
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex - 1 + giftPhotos.length) % giftPhotos.length;
+            updatePhoto();
+        });
+
+        // Next photo
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex + 1) % giftPhotos.length;
+            updatePhoto();
+        });
+
+        // Update photo display
+        function updatePhoto() {
+            currentPhoto.src = giftPhotos[currentPhotoIndex];
+            photoCounter.textContent = `${currentPhotoIndex + 1} / ${giftPhotos.length}`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!galleryOverlay.classList.contains('active')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === 'Escape') {
+                closeGallery();
+            }
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        galleryOverlay.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        galleryOverlay.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left - next photo
+                nextBtn.click();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right - previous photo
+                prevBtn.click();
+            }
+        }
+    </script>
 </body>
 </html>
