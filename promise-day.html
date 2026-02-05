@@ -94,6 +94,18 @@
             font-size: 5rem;
             margin: 1.5rem 0;
             animation: promise-seal 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            user-select: none;
+            filter: drop-shadow(0 5px 10px rgba(100, 181, 246, 0.3));
+        }
+
+        .emoji:hover {
+            transform: scale(1.1);
+        }
+
+        .emoji:active {
+            transform: scale(0.95);
         }
 
         @keyframes promise-seal {
@@ -182,10 +194,111 @@
                 transform: translateY(-20px) rotate(10deg);
             }
         }
+
+        /* GIF Overlay */
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .gif-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gif-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gif-overlay.active .gif-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gif-overlay.closing .gif-container {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Click hint */
+        .click-hint {
+            font-size: 0.9rem;
+            color: #64B5F6;
+            margin-top: 0.5rem;
+            font-style: italic;
+            opacity: 0.7;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .gif-container img {
+                border-radius: 15px;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gif-container img {
+                border-radius: 10px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .emoji {
+                font-size: 4rem;
+            }
+            .promises-list {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="promise-rings" id="rings"></div>
+    
+    <!-- GIF Overlay -->
+    <div class="gif-overlay" id="gifOverlay">
+        <div class="gif-container">
+            <img src="https://media1.tenor.com/m/PiqKG3e5f2YAAAAC/te-lo-prometo-promise.gif" alt="I Promise You">
+        </div>
+    </div>
     
     <div class="container">
         <div class="trust-badge" style="top: 5%; left: 5%;">🤝</div>
@@ -195,7 +308,8 @@
 
         <div class="date-tag">February 11, 2026</div>
         <h1>Promise Day</h1>
-        <div class="emoji">🤝</div>
+        <div class="emoji" id="promiseEmoji">🤝</div>
+        <div class="click-hint">✨ Click to seal the promise! ✨</div>
         
         <div class="promises-list">
             <ul>
@@ -234,6 +348,42 @@
         }
 
         createRings();
+
+        // Interactive GIF Animation
+        const promiseEmoji = document.getElementById('promiseEmoji');
+        const gifOverlay = document.getElementById('gifOverlay');
+        let isAnimating = false;
+
+        promiseEmoji.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Show the overlay with smooth fade-in
+            gifOverlay.classList.add('active');
+            gifOverlay.classList.remove('closing');
+
+            // Auto-hide after 5 seconds with smooth fade-out
+            setTimeout(() => {
+                gifOverlay.classList.add('closing');
+                
+                // Remove active class after transition
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }, 5000);
+        });
+
+        // Click overlay to close early
+        gifOverlay.addEventListener('click', (e) => {
+            if (e.target === gifOverlay) {
+                gifOverlay.classList.add('closing');
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
