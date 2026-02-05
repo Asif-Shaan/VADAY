@@ -367,13 +367,13 @@
     <script>
         // Photos in order: bouquet first, then reverse order of the rest
         const giftPhotos = [
-            'WhatsApp_Image_2026-02-06_at_1_06_20_AM.jpeg',      // Bouquet photo
-            'WhatsApp_Image_2026-02-06_at_1_06_20_AM__1_.jpeg',  // Glasses close-up
-            'WhatsApp_Image_2026-02-06_at_1_06_20_AM__2_.jpeg',  // Monument selfie
-            'WhatsApp_Image_2026-02-06_at_1_06_21_AM.jpeg',      // Yellow taxi selfie
-            'WhatsApp_Image_2026-02-06_at_1_06_21_AM__1_.jpeg',  // Outdoor portrait
-            'WhatsApp_Image_2026-02-06_at_1_06_21_AM__2_.jpeg',  // Black & white collage
-            'WhatsApp_Image_2026-02-06_at_1_12_27_AM.jpeg'       // Flowers selfie
+            'photo1.jpeg',  // Bouquet photo
+            'photo2.jpeg',  // Glasses close-up
+            'photo3.jpeg',  // Monument selfie
+            'photo4.jpeg',  // Yellow taxi selfie
+            'photo5.jpeg',  // Outdoor portrait
+            'photo6.jpeg',  // Black & white collage
+            'photo7.jpeg'   // Flowers selfie
         ];
 
         let currentPhotoIndex = 0;
@@ -415,11 +415,16 @@
         // Open gallery
         if (giftTrigger) {
             giftTrigger.addEventListener('click', () => {
+                console.log('Gift button clicked!');
+                console.log('Photo paths:', giftPhotos);
                 currentPhotoIndex = 0;
                 updatePhoto();
                 galleryOverlay.classList.add('active');
                 galleryOverlay.classList.remove('closing');
+                console.log('Gallery should be open now');
             });
+        } else {
+            console.error('Gift trigger button not found!');
         }
 
         // Close gallery
@@ -455,8 +460,18 @@
 
         // Update photo display
         function updatePhoto() {
+            console.log('Updating photo. Index:', currentPhotoIndex);
+            console.log('Photo source:', giftPhotos[currentPhotoIndex]);
             currentPhoto.src = giftPhotos[currentPhotoIndex];
             photoCounter.textContent = `${currentPhotoIndex + 1} / ${giftPhotos.length}`;
+            
+            // Check if image loads successfully
+            currentPhoto.onerror = function() {
+                console.error('Failed to load image:', giftPhotos[currentPhotoIndex]);
+            };
+            currentPhoto.onload = function() {
+                console.log('Image loaded successfully!');
+            };
         }
 
         // Keyboard navigation
