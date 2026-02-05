@@ -86,6 +86,17 @@
             font-size: 5rem;
             margin: 1rem 0;
             animation: rotate 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            user-select: none;
+        }
+
+        .emoji:hover {
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .emoji:active {
+            transform: scale(0.95);
         }
 
         @keyframes rotate {
@@ -159,10 +170,121 @@
         .rose-border:nth-child(2) { top: 10px; right: 10px; }
         .rose-border:nth-child(3) { bottom: 10px; left: 10px; }
         .rose-border:nth-child(4) { bottom: 10px; right: 10px; }
+
+        /* GIF Overlay */
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .gif-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gif-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gif-overlay.active .gif-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gif-overlay.closing .gif-container {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Click hint */
+        .click-hint {
+            font-size: 0.9rem;
+            color: #C8102E;
+            margin-top: 0.5rem;
+            font-style: italic;
+            opacity: 0.7;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive padding */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+                margin: 15px;
+            }
+            .message {
+                font-size: 1.2rem;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            .gif-container img {
+                border-radius: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+            .message {
+                font-size: 1.1rem;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .emoji {
+                font-size: 4rem;
+            }
+            .gif-container img {
+                border-radius: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="rose-petals" id="petals"></div>
+    
+    <!-- GIF Overlay -->
+    <div class="gif-overlay" id="gifOverlay">
+        <div class="gif-container">
+            <img src="https://media.tenor.com/p0fAvXXLPv4AAAAj/dudu-kiss-dudu-roses.gif" alt="Rose Love">
+        </div>
+    </div>
     
     <div class="container">
         <div class="rose-border">🌹</div>
@@ -172,7 +294,8 @@
 
         <div class="date-tag">FEBRUARY 7, 2026</div>
         <h1>Rose Day</h1>
-        <div class="emoji">🌹</div>
+        <div class="emoji" id="roseEmoji">🌹</div>
+        <div class="click-hint">✨ Click the rose for a sweet surprise! ✨</div>
         
         <div class="message">
             Like a rose that blooms with grace and beauty, you've brought color and fragrance to my life. Each petal represents a reason I adore you, and like the eternal rose, my love for you will never wither. You are my most precious bloom, Soha.
@@ -202,6 +325,42 @@
         }
 
         createPetals();
+
+        // Interactive GIF Animation
+        const roseEmoji = document.getElementById('roseEmoji');
+        const gifOverlay = document.getElementById('gifOverlay');
+        let isAnimating = false;
+
+        roseEmoji.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Show the overlay with smooth fade-in
+            gifOverlay.classList.add('active');
+            gifOverlay.classList.remove('closing');
+
+            // Auto-hide after 5 seconds with smooth fade-out
+            setTimeout(() => {
+                gifOverlay.classList.add('closing');
+                
+                // Remove active class after transition
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }, 5000);
+        });
+
+        // Click overlay to close early
+        gifOverlay.addEventListener('click', (e) => {
+            if (e.target === gifOverlay) {
+                gifOverlay.classList.add('closing');
+                setTimeout(() => {
+                    gifOverlay.classList.remove('active', 'closing');
+                    isAnimating = false;
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
